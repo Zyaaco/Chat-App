@@ -80,7 +80,7 @@ function Signup(props) {
             <TextInput
               required
               label="Email"
-              placeholder="hello@mantine.dev"
+              placeholder="example@email.com"
               value={form.values.email}
               onChange={(event) =>
                 form.setFieldValue("email", event.currentTarget.value)
