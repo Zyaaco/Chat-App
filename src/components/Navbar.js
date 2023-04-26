@@ -6,6 +6,7 @@ import {
   Flex,
   Group,
   Menu,
+  Modal,
   Text,
   TextInput,
   UnstyledButton,
@@ -25,6 +26,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { supabase } from "../lib/supabaseClient";
 import { UserContext } from "@/context/UserContext";
+import { useDisclosure } from "@mantine/hooks";
+import { toast } from "react-hot-toast";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -64,6 +67,7 @@ const useStyles = createStyles((theme) => ({
 const Navbar = () => {
   const { classes, cx } = useStyles();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
+  const [opened, { open, close }] = useDisclosure(false);
   // const [authUser, setAuthUser] = useState(null);
 
   // useEffect(() => {
@@ -78,6 +82,25 @@ const Navbar = () => {
 
   return (
     <div className={classes.header}>
+      <Modal
+        opened={opened}
+        onClose={close}
+        withCloseButton={true}
+        title="Delete"
+      >
+        Are you sure you want to do that? (not recommended)
+        <Flex direction="row" justify="center" align="center" mt={30} gap="xl">
+          <Button
+            onClick={() => {
+              toast.loading("( ͡° ͜ʖ ͡°)");
+              router.push("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            }}
+          >
+            Yes
+          </Button>
+          <Button onClick={close}>No</Button>
+        </Flex>
+      </Modal>
       {user ? (
         <Flex className={classes.mainSection}>
           <Group position="left" sx={{ flexGrow: 1 }} mx={40}>
@@ -139,6 +162,7 @@ const Navbar = () => {
               <Menu.Item
                 color="red"
                 icon={<IconTrash size="0.9rem" stroke={1.5} />}
+                onClick={open}
               >
                 Delete account
               </Menu.Item>
