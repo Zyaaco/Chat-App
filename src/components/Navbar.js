@@ -85,7 +85,7 @@ const Navbar = () => {
           </Group>
           <Menu
             width={260}
-            position="right"
+            position="bottom-end"
             mr={40}
             transitionProps={{ transition: "pop-top-right" }}
             onClose={() => setUserMenuOpened(false)}
