@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 
 export const UserContext = createContext();
 
@@ -36,6 +37,8 @@ export const UserProvider = ({ children }) => {
       options: {
         data: {
           name: values.name,
+          image:
+            "https://t4.ftcdn.net/jpg/04/62/63/65/360_F_462636502_9cDAYuyVvBY4qYJlHjW7vqar5HYS8h8x.jpg",
         },
       },
     });

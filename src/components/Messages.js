@@ -20,18 +20,22 @@ const Messages = () => {
       {messages.map((message, index) => (
         <div
           key={index}
-          className={`flex mb-4 p-4 w-full rounded-md text-white bg-black/10 hover:bg-black/20`}
+          className={`flex mb-4 p-4 w-full rounded-md text-white bg-black/10 hover:bg-black/20 duration-100`}
         >
           <img
             src={message.image}
             alt={message.username}
-            className="w-8 h-8 mr-2 rounded-full object-cover"
+            className="w-10 h-10 mr-2 rounded-full object-cover"
           />
           <div>
-            <div className="text-sm font-medium">{message.username}</div>
-            <div className="max-w-1xl wrapping">{message.content}</div>
+            <div className="text-md font-medium">{message.username}</div>
+            <div className="max-w-1xl wrapping text-gray-300">
+              {message.content}
+            </div>
             <div className="text-xs text-gray-500">
-              {message.created_at.split("T")[1].split(".")[0]}
+              {message.created_at.split("T")[0] +
+                " " +
+                message.created_at.split("T")[1].split(".")[0]}
             </div>
           </div>
         </div>

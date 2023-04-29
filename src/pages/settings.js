@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { Input, Button, Avatar } from "@mantine/core";
 import { UserContext } from "@/context/UserContext";
+import { IconPhotoCheck, IconSignature } from "@tabler/icons-react";
 
 const AccountSettings = () => {
   const { user } = useContext(UserContext);
@@ -28,7 +29,7 @@ const AccountSettings = () => {
     <div className="flex flex-col items-center space-y-8">
       <Avatar src={image} size="xl" />
       <form
-        className="flex flex-col items-center space-y-4"
+        className="flex flex-col items-center space-y-4 max-w-[50rem]"
         onSubmit={handleSubmit}
       >
         <Input
@@ -36,12 +37,15 @@ const AccountSettings = () => {
           value={username}
           onChange={handleUsernameChange}
           placeholder="Enter your username"
+          icon={<IconSignature />}
         />
         <Input
           label="Image URL"
           value={image}
           onChange={handleImageChange}
           placeholder="Enter the URL for your profile picture"
+          className="w-[30rem]"
+          icon={<IconPhotoCheck />}
         />
         <Button type="submit">Save Changes</Button>
       </form>

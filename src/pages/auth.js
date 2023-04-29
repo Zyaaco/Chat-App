@@ -117,7 +117,12 @@ function Signup(props) {
                 ? "Already have an account? Login"
                 : "Don't have an account? Register"}
             </Anchor>
-            <Button type="submit" radius="xl">
+            <Button
+              type="submit"
+              variant="light"
+              color="gray"
+              className="duration-300 bg-[#1A1B1E]"
+            >
               {upperFirst(type)}
             </Button>
           </Group>

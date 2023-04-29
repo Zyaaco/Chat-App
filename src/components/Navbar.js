@@ -17,6 +17,7 @@ import { useForm } from "@mantine/form";
 import { modals } from "@mantine/modals";
 import {
   IconChevronDown,
+  IconDeviceMobileMessage,
   IconLogout,
   IconSettings,
   IconTrash,
@@ -91,9 +92,17 @@ const Navbar = () => {
         Are you sure you want to do that? (not recommended)
         <Flex direction="row" justify="center" align="center" mt={30} gap="xl">
           <Button
-            onClick={() => {
-              toast.loading("( ͡° ͜ʖ ͡°)");
-              router.push("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            onClick={async () => {
+              const { data, error } = await supabase.rpc("deleteUser");
+              if (error) {
+                toast.error(error.message);
+                console.log(error);
+                return;
+              }
+              toast.success("User deleted");
+              close();
+              const { d, e } = await supabase.auth.signOut();
+              router.push("/auth");
             }}
           >
             Yes
@@ -104,7 +113,9 @@ const Navbar = () => {
       {user ? (
         <Flex className={classes.mainSection}>
           <Group position="left" sx={{ flexGrow: 1 }} mx={40}>
-            <Link href="/">Logo</Link>
+            <Link href="/">
+              <IconDeviceMobileMessage className="w-10 h-10" />
+            </Link>
           </Group>
           <Menu
             width={260}
@@ -172,15 +183,20 @@ const Navbar = () => {
       ) : (
         <Flex className={classes.mainSection}>
           <Group position="left" sx={{ flexGrow: 1 }} mx={40}>
-            <Link href="/">Logo</Link>
+            <Link href="/">
+              <IconDeviceMobileMessage className="w-10 h-10" />
+            </Link>
           </Group>
           <Group position="right" noWrap>
             <Button
+              variant="light"
+              color="gray"
+              className="duration-300 bg-[#1A1B1E]/40 mx-10"
               onClick={() => {
                 router.push("/auth");
               }}
             >
-              Log In
+              Login
             </Button>
           </Group>
         </Flex>
